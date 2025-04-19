@@ -18,4 +18,4 @@
 
 ## 💡 使用方法
 
-- 下载以后将NPOI文件夹导入Unity项目`Assets/Plugins/`目录即可。
+- 下载以后将`NPOI`文件夹导入Unity项目`Assets/Plugins/`目录即可。
