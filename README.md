@@ -19,5 +19,3 @@
 ## 💡 使用方法
 
 - 下载以后将NPOI文件夹导入Unity项目`Assets/Plugins/`目录即可。
-
-NPOI is the .NET version of Apache POI project, which can be used to read/write Office 2003/2007 files very easily.
